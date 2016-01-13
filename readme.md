@@ -11,13 +11,13 @@ docker build -t <registry>/rancher-goagent:<version> .
 
 To deploy:
 
-Gocd server: Starts gocd server and configures it
+Gocd server: Starts gocd agent and configures it
 
 ```
-docker run -td --name go-server \
+docker run -td --name go-agent \
 -e DEPLOY_ENV=dev \
--h go-server.${DNS_DOMAIN} \
--v <work-volume> /opt/go-server/work
+-h go-agent.${DNS_DOMAIN} \
+-v <work-volume> /opt/go-agent/work
 <registry>/rancher-goagent:<version>
 
 DEPLOY_ENV -> Deploy environment
@@ -32,8 +32,6 @@ SERVER_MEM="512m"
 SERVER_MAX_MEM="1024m"
 SERVER_MAX_PERM_GEN="256m"
 SERVER_MIN_PERM_GEN="128m"
-GO_SERVER_PORT="8153"
-GO_SERVER_SSL_PORT="8154"
 SERVER_DIR="$GOCD_HOME"
 SERVER_WORK_DIR="$SERVER_DIR"
 GO_SERVER=<IP_GOSERVER>
