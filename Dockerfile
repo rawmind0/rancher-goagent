@@ -18,4 +18,4 @@ RUN mkdir /var/log/go-agent /var/run/go-agent \
 
 WORKDIR ${GOCD_HOME}
 
-ENTRYPOINT ["${GOCD_HOME}/agent.sh"]
+ENTRYPOINT ["/opt/go-agent/agent.sh"]
