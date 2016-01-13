@@ -13,7 +13,7 @@ ENV GOCD_RELEASE_ARCHIVE ${GOCD_RELEASE}-${GOCD_REVISION}.zip
 RUN mkdir /var/log/go-agent /var/run/go-agent \
   && cd /opt && curl -sSL ${GOCD_REPO}/${GOCD_RELEASE_ARCHIVE} -O && unzip ${GOCD_RELEASE_ARCHIVE} && rm ${GOCD_RELEASE_ARCHIVE} \
   && ln -s /opt/${GOCD_RELEASE} ${GOCD_HOME} \
-  && chmod 774 ${GOCD_HOME}/*.sh
+  && chmod 774 ${GOCD_HOME}/*.sh \
   && mkdir -p ${GOCD_HOME}/work
 
 WORKDIR ${GOCD_HOME}

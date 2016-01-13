@@ -19,7 +19,6 @@ docker run -td --name go-agent \
 -v <work-volume> /opt/go-agent/work
 <registry>/rancher-goagent:<version>
 
-DEPLOY_ENV -> Deploy environment
 ```
 
 To config:
