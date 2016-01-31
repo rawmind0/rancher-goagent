@@ -15,15 +15,16 @@ Gocd server: Starts gocd agent and configures it
 
 ```
 docker run -td --name go-agent \
--h go-agent.${DNS_DOMAIN} \
 -v <work-volume> /opt/go-agent/work
 <registry>/rancher-goagent:<version>
 
 ```
 
-To config:
 
-Change and add these env variables to the docker deploy.
+# How it works
+
+* The docker has the entrypoint /usr/bin/start.sh, that runs go-server.
+* Config params could be modified overriding these env variables:
 
 ```
 AGENT_MEM="128m"
