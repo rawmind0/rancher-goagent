@@ -3,8 +3,8 @@ MAINTAINER Raul Sanchez <rawmind@gmail.com>
 
 # Set environment
 ENV GOCD_REPO=https://download.go.cd/gocd/ \
-  GOCD_RELEASE=go-agent-15.3.1 \
-  GOCD_REVISION=2777 \
+  GOCD_RELEASE=go-agent-16.1.0 \
+  GOCD_REVISION=2855 \
   GOCD_HOME=/opt/go-agent \
   DOCKER_VERSION=1.9.1 \
   PATH=$GOCD_HOME:$PATH
