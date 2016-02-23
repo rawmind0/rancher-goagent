@@ -8,14 +8,15 @@ function log {
 
 function checkrancher {
     log "checking rancher network..."
-    a="1"
+
+    a="`ip a s dev eth0 &> /dev/null; echo $?`" 
     while  [ $a -eq 1 ];
     do
         a="`ip a s dev eth0 &> /dev/null; echo $?`" 
         sleep 1
     done
 
-    b="1"
+    b="`ping -c 1 rancher-metadata &> /dev/null; echo $?`"
     while [ $b -eq 1 ]; 
     do
         b="`ping -c 1 rancher-metadata &> /dev/null; echo $?`"
@@ -25,9 +26,7 @@ function checkrancher {
 
 checkrancher
 
-DOCKER_HOST=tcp://$(curl http://rancher-metadata/latest/self/host/agent_ip):2375
-
-export DOCKER_HOST
+echo `hostname` > /opt/go-agent/config/guid.txt
 
 log "[ Starting gocd agent... ]"
 /opt/go-agent/agent.sh
