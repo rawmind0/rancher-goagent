@@ -25,19 +25,33 @@ function checkrancher {
 }
 
 function installDocker {
-    DOCKER_VERSION=${DOCKER_VERSION:-"1.12.0"} 
+    DOCKER_SERVER_VERSION=$(curl http://rancher-metadata/2015-12-19/self/host/labels/io.rancher.host.docker_version)
+
     DOCKER_BIN=${DOCKER_BIN:-"/usr/bin/docker"}
     log "[ Checking Docker client ${DOCKER_VERSION} ... ]"
 
     if [ ! -e ${DOCKER_BIN} ]; then
         log "[ Installing Docker client ${DOCKER_VERSION} ... ]"
 
-        If [ "$DOCKER_VERSION" == "1.10.3" ]; then
+        case "$DOCKER_SERVER_VERSION" in
+            "1.9")
+                DOCKER_VERSION="1.9.1"
                 DOCKER_EXTRACT_FILE="usr/local/bin/docker"
-        else
-                DOCKER_EXTRACT_FILE="docker/docker"
-        fi
+            ;;
+            "1.10")
+                DOCKER_VERSION="1.10.3"
+                DOCKER_EXTRACT_FILE="usr/local/bin/docker"
+            ;;
+            "1.11")
+                DOCKER_VERSION="1.11.2"
+            ;;
+            "1.12") 
+                DOCKER_VERSION="1.12.0"
+            ;;
+        esac
         
+        DOCKER_EXTRACT_FILE=${DOCKER_EXTRACT_FILE:-"docker/docker"}
+
         cd /tmp
         curl -Ss https://get.docker.com/builds/Linux/x86_64/docker-${DOCKER_VERSION}.tgz  | tar zxvf - ${DOCKER_EXTRACT_FILE} 
         if [ $? -eq 0 ]; then 
