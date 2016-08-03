@@ -2,11 +2,11 @@ FROM rawmind/rancher-jvm8:0.0.2
 MAINTAINER Raul Sanchez <rawmind@gmail.com>
 
 # Set environment
-ENV GOCD_VERSION=16.2.1 \
+ENV GOCD_VERSION=16.7.0 \
   GOCD_RELEASE=go-agent \
-  GOCD_REVISION=3027 \
+  GOCD_REVISION=3819 \
   GOCD_HOME=/opt/go-agent \
-  DOCKER_VERSION=1.9.1 \
+  DOCKER_VERSION=1.12.0 \
   PATH=$GOCD_HOME:$PATH
 ENV GOCD_REPO=https://download.go.cd/binaries/${GOCD_VERSION}-${GOCD_REVISION}/generic \
   GOCD_RELEASE_ARCHIVE=${GOCD_RELEASE}-${GOCD_VERSION}-${GOCD_REVISION}.zip \
