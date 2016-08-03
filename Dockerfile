@@ -19,8 +19,9 @@ RUN apk add --update git && rm -rf /var/cache/apk/* \
   && mv /opt/${GOCD_RELEASE}-${GOCD_VERSION} ${GOCD_HOME} \
   && chmod 774 ${GOCD_HOME}/*.sh \
   && mkdir -p ${GOCD_HOME}/work \
-  && cd /tmp && curl https://get.docker.com/builds/Linux/x86_64/docker-${DOCKER_VERSION} -O && chmod 755 /tmp/docker-${DOCKER_VERSION} \
-  && mv /tmp/docker-${DOCKER_VERSION} /usr/bin/docker
+  && cd /tmp && curl https://get.docker.com/builds/Linux/x86_64/docker-${DOCKER_VERSION}.tgz  | tar zxvf - docker/docker \ 
+  && chmod 755 /tmp/docker/docker \
+  && mv /tmp/docker/docker /usr/bin/docker
 
 # Add start script
 ADD start.sh /usr/bin/start.sh
