@@ -32,11 +32,17 @@ function installDocker {
     if [ ! -e ${DOCKER_BIN} ]; then
         log "[ Installing Docker client ${DOCKER_VERSION} ... ]"
 
+        If [ "$DOCKER_VERSION" == "1.10.3" ]; then
+                DOCKER_EXTRACT_FILE="usr/local/bin/docker"
+        else
+                DOCKER_EXTRACT_FILE="docker/docker"
+        fi
+        
         cd /tmp
-        curl -Ss https://get.docker.com/builds/Linux/x86_64/docker-${DOCKER_VERSION}.tgz  | tar zxvf - docker/docker 
+        curl -Ss https://get.docker.com/builds/Linux/x86_64/docker-${DOCKER_VERSION}.tgz  | tar zxvf - ${DOCKER_EXTRACT_FILE} 
         if [ $? -eq 0 ]; then 
-            chmod 755 /tmp/docker/docker 
-            mv /tmp/docker/docker ${DOCKER_BIN}
+            chmod 755 /tmp/${DOCKER_EXTRACT_FILE}
+            mv /tmp/${DOCKER_EXTRACT_FILE} ${DOCKER_BIN}
         else
             log "[ ERROR ]"
             exit 1
