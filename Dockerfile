@@ -6,7 +6,6 @@ ENV GOCD_VERSION=16.7.0 \
   GOCD_RELEASE=go-agent \
   GOCD_REVISION=3819 \
   GOCD_HOME=/opt/go-agent \
-  DOCKER_VERSION=1.12.0 \
   PATH=$GOCD_HOME:$PATH
 ENV GOCD_REPO=https://download.go.cd/binaries/${GOCD_VERSION}-${GOCD_REVISION}/generic \
   GOCD_RELEASE_ARCHIVE=${GOCD_RELEASE}-${GOCD_VERSION}-${GOCD_REVISION}.zip \
@@ -18,10 +17,7 @@ RUN apk add --update git && rm -rf /var/cache/apk/* \
   && cd /opt && curl -sSL ${GOCD_REPO}/${GOCD_RELEASE_ARCHIVE} -O && unzip ${GOCD_RELEASE_ARCHIVE} && rm ${GOCD_RELEASE_ARCHIVE} \
   && mv /opt/${GOCD_RELEASE}-${GOCD_VERSION} ${GOCD_HOME} \
   && chmod 774 ${GOCD_HOME}/*.sh \
-  && mkdir -p ${GOCD_HOME}/work \
-  && cd /tmp && curl https://get.docker.com/builds/Linux/x86_64/docker-${DOCKER_VERSION}.tgz  | tar zxvf - docker/docker \ 
-  && chmod 755 /tmp/docker/docker \
-  && mv /tmp/docker/docker /usr/bin/docker
+  && mkdir -p ${GOCD_HOME}/work 
 
 # Add start script
 ADD start.sh /usr/bin/start.sh
